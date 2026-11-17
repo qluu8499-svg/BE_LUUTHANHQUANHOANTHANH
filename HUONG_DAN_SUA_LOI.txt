@@ -1,0 +1,20 @@
+﻿HUONG DAN BAN DA SUA LOI - BE4_LUUTHANHQUAN
+
+Cac sua doi trong ban nay:
+- Admin > Quan ly don hang: tim kiem theo ten khach, so dien thoai, email, ten tai khoan va ten san pham.
+- Gio hang: so luong moi san pham duoc gioi han tu 1 den 99; tang so luong nhieu lan khong vuot qua 99.
+- Checkout: du lieu so luong trong gio hang duoc chuan hoa truoc khi ghi chi tiet don hang.
+
+Khong thay doi database:
+- Khong chay migration hay script SQL.
+- Khong doi ten AddressDelivery.
+- Khong thay connection string MyStoreEntities.
+- Khong xoa hoac thay the database cua ban.
+
+Kiem thu:
+- Mo BE4_LUUTHANHQUAN.sln bang Visual Studio.
+- Restore NuGet Packages, sau do Build > Rebuild Solution.
+- Kiem tra connection string MyStoreEntities trong Web.config.
+- Kiem tra cac truong hop tim kiem Admin va gio hang/checkout Customer.
+
+Luu y: Chua the xac nhan Build va runtime voi SQL Server thuc te trong moi truong hien tai. Xem BAO_CAO_SUA_LOI.txt de biet cac buoc kiem thu va gioi han xac minh.

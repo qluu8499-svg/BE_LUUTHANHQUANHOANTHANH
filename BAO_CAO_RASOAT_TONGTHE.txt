@@ -1,0 +1,58 @@
+BAO CAO RA SOAT TONG THE - BE4_LUUTHANHQUAN
+Ngay: 17/11/2026
+
+A. CAC LOI CU THE DA PHAT HIEN VA SUA
+
+1. Web.config - cau hinh bindingRedirect khong hop le
+- Ban goc co nhieu khoi <dependentAssembly> chi chua <bindingRedirect>, thieu <assemblyIdentity>.
+- Da thay bang cac redirect co assemblyIdentity tuong ung voi cac thu vien project dang dung: MVC, Razor/WebPages, Helpers, Newtonsoft.Json, EntityFramework, Antlr, Microsoft.Web.Infrastructure, System.Web.Optimization va WebGrease.
+- Them customErrors mode="RemoteOnly" de khong hien chi tiet loi server cho truy cap tu xa.
+- Giu nguyen connection string MyStoreEntities va cac gia tri PayPal placeholder; khong tu y thay doi thong tin moi truong.
+
+2. PayPal - thieu view bao loi
+- PaypalController goi View("FailureView") trong cac nhanh callback/giao dich that bai.
+- Source khong co Views/Paypal/FailureView.cshtml, co the gay them HTTP 500 khi can hien thi trang that bai.
+- Da bo sung view that bai, thong bao ro don hang chua tao va giu gio hang de thu lai; da khai bao Content trong csproj.
+
+3. Admin/Products/Create - thieu partial view
+- Create.cshtml goi PVCreateEditProduct nhung file partial khong ton tai, co the gay HTTP 500 khi mo trang them san pham.
+- Da bo sung Areas/Admin/Views/Products/PVCreateEditProduct.cshtml va khai bao Content trong csproj.
+- Sua markup class va thuoc tinh TextAreaFor bi viet sai trong partial hien co va partial moi.
+
+4. Phan trang - page=0/page am co the gay exception
+- Cac action Home/Index, Home/ProductList, Home/ProductDetails, Admin/Products/Index va Admin/Orders/Index dua truc tiep page tu query string vao PagedList.
+- Da gioi han page toi thieu la 1 de tranh loi chi so trang khong hop le.
+
+5. Tai nguyen Entity Framework
+- HomeController tao MyStoreEntities nhung khong Dispose.
+- Da bo sung Dispose(bool) de giai phong DbContext sau request.
+
+B. KIEM TRA STATIC DA THUC HIEN
+- Parse XML: Web.config, cac config, csproj, EDMX va cac file XML lien quan: khong phat hien loi cu phap.
+- Kiem tra cac Compile/Content/None/EntityDeploy Include trong csproj: cac duong dan duoc khai bao deu ton tai.
+- Kiem tra HintPath NuGet: cac DLL duoc tham chieu deu co tep tai duong dan khai bao.
+- Kiem tra cac View/PartialView duoc goi bang ten tu Controller: khong con view/partial tham chieu bi thieu trong cac truong hop da quet.
+- Kiem tra Layout va Html.Partial/RenderPartial: khong con partial tham chieu bi thieu trong cac view da quet.
+- Kiem tra cac view .cshtml: tat ca deu duoc khai bao trong csproj.
+- Khong sua schema database, khong chay SQL/migration va khong xoa bang/cot.
+
+C. CAC MUC CHUA THE XAC NHAN
+- Moi truong hien tai khong co MSBuild/Visual Studio/.NET Framework compiler; chua the Build/Rebuild that.
+- Khong co SQL Server MyStore de ket noi thu; chua the xac nhan connection string, schema thuc te, quyen truy cap va du lieu.
+- Connection string hien tai van la localhost\\SQLExpress, database MyStore, Windows Integrated Security. Can dam bao may chay co dung SQL Server instance/database va tai khoan IIS/IIS Express co quyen.
+- PayPal Client ID/Secret van la YOUR_PAYPAL_CLIENT_ID / YOUR_PAYPAL_CLIENT_SECRET. Can thay bang Sandbox credentials truoc khi thu thanh toan.
+- PayPal hien gui currency USD trong khi ProductPrice lay truc tiep tu database. Can xac nhan gia trong DB la USD; neu la VND thi phai thong nhat quy tac quy doi truoc khi bat thanh toan.
+- Cac tinh nang phu thuoc schema ton kho/so luong ban va cot mo rong chua duoc them tu dong; khong chay DATABASE_ADD_INVENTORY.sql.
+
+D. KIEM THU TREN WINDOWS
+1. Giai nen ban ZIP, mo BE4_LUUTHANHQUAN.sln bang Visual Studio 2019/2022 co workload ASP.NET and web development.
+2. Restore NuGet Packages, chon Build > Rebuild Solution.
+3. Kiem tra Web.config: SQL Server instance/database MyStore, quyen Windows Authentication va PayPal Sandbox credentials.
+4. Chay website, thu trang chu, danh sach/chi tiet san pham, dang ky/dang nhap.
+5. Thu Admin: /Admin/Products/Create, /Admin/Products/Edit, /Admin/Orders, /Admin/Customers.
+6. Thu Customer: gio hang, checkout COD, xem lich su don hang, chi tiet va mua lai.
+7. Thu PayPal Sandbox ca luong thanh cong, cancel, callback thieu session va callback that bai.
+8. Thu URL phan trang page=0 va page=-1; phai tu dong ve trang 1.
+
+KET LUAN
+Da sua cac loi source xac dinh duoc khi ra soat tinh trang project va bo sung cac view/partial bi thieu. Day la ket qua sua va kiem tra tinh toan ven static; chua the cam ket het HTTP 500 tren may chay that khi chua Build bang Visual Studio va chua ket noi dung SQL Server/PayPal cua ban.

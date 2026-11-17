@@ -1,0 +1,47 @@
+﻿BAO CAO SUA LOI - BE4_LUUTHANHQUAN
+Ngay ra soat: 17/11/2026
+
+1. CAC LOI DA SUA TRONG SOURCE
+- Admin/Orders: bo loc truoc day chi tim theo ten khach hang. Da sua de tim theo ten khach hang, so dien thoai, email, tai khoan va ten san pham trong don.
+- Admin/Orders view: cap nhat nhan va goi y o tim kiem de phan anh dung cac truong co the tim.
+- Cart/AddToCart: gioi han so luong moi san pham toi da 99; cong don gio hang cung khong vuot qua 99.
+- Cart/Checkout: chuan hoa so luong trong session ve khoang 1..99 truoc khi tao OrderDetail, tranh du lieu session cu/khong hop le lam sai so luong don.
+
+2. CAC PHAN DUOC GIU NGUYEN
+- Giu nguyen cau truc ASP.NET MVC 5 / .NET Framework 4.7.2.
+- Giu nguyen EDMX va ten cot AddressDelivery theo database dang co trong project.
+- Khong chay script SQL, khong tao/xoa/doi ten bang cot, khong thay connection string.
+- Giu nguyen cac controller, view va chuc nang khac khong can sua.
+
+3. KIEM TRA TINH TOAN VEN TEP
+- Da parse cac tep XML/config/project/EDMX co trong source: khong phat hien loi cu phap XML.
+- Da doi chieu cac Compile/Content/None Include trong csproj: khong co tep duoc khai bao nhung bi thieu.
+- Da doc cac tep source/config lien quan bang UTF-8: khong phat hien loi ma hoa.
+- Da kiem tra thay doi trong Admin Orders va Cart sau khi sua.
+
+4. CAC MUC CHUA THE XAC NHAN
+- Chua the Build/Rebuild bang Visual Studio/MSBuild tren Windows trong moi truong nay.
+- Chua the ket noi SQL Server de chay thu checkout, truy van don hang, phan quyen Admin/Customer va cap nhat trang thai.
+- Vi vay khong khang dinh project da chay thanh cong tren database thuc te.
+
+5. KIEM THU DE NGHI TREN MAY CO VISUAL STUDIO
+1) Sao luu database MyStore truoc khi kiem thu; khong can chay migration cho cac thay doi source trong ban sua nay.
+2) Mo BE4_LUUTHANHQUAN.sln, Restore NuGet Packages va Build > Rebuild Solution.
+3) Dang nhap Admin, vao /Admin/Orders; thu tim bang ten, so dien thoai, email, tai khoan va ten san pham.
+4) Dang nhap Customer, them san pham vao gio nhieu lan; xac nhan so luong khong vuot qua 99.
+5) Checkout mot don thu va kiem tra Order, OrderDetail trong database.
+6) Thu xem /Orders, /Orders/Details va kiem tra tai khoan khac khong the xem don cua nhau.
+
+Ghi chu: Ban sua nay chi sua loi source xac dinh duoc tu ma nguon va giu nguyen database hien tai. Neu Visual Studio bao loi build hoac website phat sinh loi SQL, can doi chieu thong bao loi thuc te va schema database MyStore de xu ly chinh xac.
+
+
+6. BO SUNG TREN BAN SOURCE TIEP THEO
+- Bao toan tat ca tep goc va cac chuc nang da co.
+- Bo sung trang danh sach san pham theo danh muc, menu danh muc dong va phan trang.
+- Bo sung trang thong tin tai khoan, cap nhat ho so va doi mat khau.
+- Bo sung CRUD tai khoan Admin, co rang buoc khong tu xoa tai khoan dang dang nhap va khong xoa Admin cuoi cung.
+- Bo sung upload anh san pham co kiem tra dinh dang va dung luong; khi Edit khong chon anh moi thi giu anh cu.
+- Bo sung Data Annotation bang metadata partial; khong sua truc tiep cac file Model generated tu EDMX.
+- Bo sung danh sach san pham trong trang chi tiet danh muc.
+- Sua duong dan layout Admin/Home.
+- Cac thay doi database ve ton kho va truong Order van de rieng, khong tu dong ap dung.

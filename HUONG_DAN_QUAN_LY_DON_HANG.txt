@@ -1,0 +1,29 @@
+CHỨC NĂNG QUẢN LÝ ĐƠN HÀNG - BE4_LUUTHANHQUAN
+
+1. Khách hàng:
+   - Đăng nhập rồi vào menu "Đơn hàng của tôi" (/Orders).
+   - Tìm kiếm theo mã đơn hàng hoặc tên sản phẩm.
+   - Tab "Tất cả đơn" gom theo trạng thái, mỗi nhóm hiển thị 2 đơn gần nhất; chọn "Xem thêm" để xem tối đa 50 đơn gần nhất của trạng thái đó.
+   - Có thể xem hóa đơn, xem chi tiết từng sản phẩm hoặc mua lại (mỗi sản phẩm được thêm với số lượng 1).
+   - Khách chỉ xem được đơn hàng thuộc CustomerID gắn với tài khoản đang đăng nhập.
+
+2. Admin:
+   - Tài khoản phải có UserRole = "A" hoặc "Admin" trong bảng Users.
+   - Đăng nhập bằng tài khoản admin rồi vào /Admin/Orders.
+   - Tìm theo tên khách hàng, lọc trạng thái và ngày đặt hàng; danh sách phân trang 15 đơn/trang.
+   - Mở "Chi tiết đơn hàng" để xem khách hàng, địa chỉ giao, sản phẩm, số lượng, đơn giá, thành tiền và cập nhật trạng thái.
+
+3. Trạng thái:
+   Giao diện Customer sử dụng: Chờ thanh toán, Đang xử lý, Đang vận chuyển, Đã giao, Đã hủy.
+   Dữ liệu cũ Chờ xác nhận, Chưa thanh toán, Đang giao vẫn được nhận diện trong các nhóm tương ứng.
+
+4. Cách chạy:
+   - Giải nén toàn bộ ZIP.
+   - Mở BE4_LUUTHANHQUAN.sln bằng Visual Studio trên Windows.
+   - Kiểm tra connection string MyStoreEntities trong Web.config trỏ đúng SQL Server/database MyStore.
+   - Restore NuGet packages nếu cần, Build/Rebuild Solution rồi chạy dự án.
+
+LƯU Ý:
+- Cần bảo đảm tài khoản quản trị trong bảng Users có UserRole đúng là A (cột UserRole hiện được khai báo nchar(1)).
+- Dự án hiện tại chưa map các cột tồn kho QuantityInStock/QuantitySold và phương thức thanh toán vào EDMX. Không chạy script thay đổi DB khi chưa sao lưu; xem BAO_CAO_CHECKLIST.txt và DATABASE_ADD_INVENTORY.sql.
+- Đây là ASP.NET MVC 5 / .NET Framework 4.7.2. Runtime cần được xác nhận trên Visual Studio + SQL Server của bạn.

@@ -1,0 +1,56 @@
+BAO CAO RA SOAT PROJECT - BE4_LUUTHANHQUAN
+
+1. DA DOI CHIEU TAI LIEU
+- PowerPoint Ktra BE: yeu cau Admin quan ly don hang va Customer xem lich su mua hang.
+- Excel LTW_Checklist_BE: doi chieu cac nhom DB, Layout, Admin, Customer, gio hang va thanh toan.
+
+2. DA BO SUNG / SUA TRONG SOURCE
+[OK - static] Admin Orders: loc theo ten khach hang, trang thai va khoang ngay dat hang; sap xep theo ngay, tong tien hoac ten khach hang.
+[OK - static] Admin Orders: phan trang 15 don hang/trang, hien thong bao KHONG CO khi khong co ket qua.
+[OK - static] Admin Orders: xem chi tiet don, thong tin khach hang, chi tiet tung san pham va cap nhat trang thai.
+[OK - static] Admin Home: yeu cau quyen A/Admin, dong bo bao ve voi cac controller quan tri.
+[OK - static] Customer Orders: truy van theo CustomerID dang dang nhap; khong tra don cua tai khoan khac.
+[OK - static] Customer Orders: tim theo ma don hang hoac ten san pham.
+[OK - static] Customer Orders: nhom theo 5 trang thai tren giao dien; tab Tat ca hien 2 don moi nhat moi nhom.
+[OK - static] Customer Orders: nut Xem them lay toi da 50 don moi nhat cua trang thai duoc chon.
+[OK - static] Customer Orders: mua lai them moi san pham voi so luong 1; xem chi tiet san pham dieu huong den Home/ProductDetails.
+[OK - static] Don moi tao tu Checkout dung trang thai Cho thanh toan; van tuong thich du lieu cu Cho xac nhan/Chua thanh toan va Dang giao.
+[OK - static] Bo sung cac Compile/Content Include bi thieu cho CustomersController va cac view Customers; dang ky partial _OrderCard.
+[OK - static] XML project, Web.config, packages.config va EDMX parse hop le.
+[OK - static] Tat ca file source/config text duoc kiem tra doc duoc bang UTF-8.
+
+3. CAC MUC CHUA THE XAC NHAN / CAN DATABASE HOAC VISUAL STUDIO WINDOWS
+[CHUA XAC MINH RUNTIME] Build ASP.NET MVC5 bang MSBuild/Visual Studio tren Windows. Moi truong thao tac hien tai khong co .NET Framework MSBuild/Mono nen khong the chay build that.
+[CHUA XAC MINH RUNTIME] Ket noi SQL Server va dang nhap bang tai khoan Admin/Customer thuc te.
+[CAN DATABASE] Checklist ton kho va so luong da ban: Product/EDMX hien tai chua co QuantityInStock va QuantitySold. File DATABASE_ADD_INVENTORY.sql la script bo sung schema; can backup DB, chay script va Update Model from Database truoc khi viet/chay cac truy van ton kho. Khong tu dong chay migration tren database cua ban.
+[CAN DATABASE] Cac truong ShippingAddress, DeliveryMethod, PaymentMethod va OrderDetail.TotalPrice khong co trong EDMX hien tai; khong tu y them vao entity vi se gay loi neu database chua co cot.
+[CHUA TEST] Luong checkout, cap nhat ton kho, thanh toan va cac rang buoc du lieu can test voi database MyStore that.
+
+4. HUONG DAN KIEM TRA TREN MAY WINDOWS
+- Mo BE4_LUUTHANHQUAN.sln bang Visual Studio 2019/2022 co ASP.NET and web development.
+- Kiem tra connection string MyStoreEntities trong Web.config va dam bao SQL Server co database MyStore.
+- Restore NuGet packages neu Visual Studio yeu cau; Build > Rebuild Solution.
+- Dang nhap tai khoan co Users.UserRole = 'A' de kiem tra /Admin/Orders va /Admin/Customers.
+- Dang nhap tai khoan khach hang, dat don thu, vao /Orders de kiem tra cac tab, tim kiem, xem chi tiet va mua lai.
+- Test rieng cac truong hop: khong co don, co hon 2 don cung trang thai, co hon 15 don Admin, loc ngay dau/cuoi ngay, va tai khoan khach khong duoc xem don cua nguoi khac.
+
+Luu y: Bao cao static khong dong nghia voi da build/chay thanh cong tren SQL Server cua ban. Can thuc hien cac buoc runtime tren moi truong Windows va database dung cua project.
+
+
+5. BO SUNG TIEP THEO - GIU NGUYEN SOURCE CU
+- Them Home/ProductList: xem san pham theo danh muc, tim kiem, sap xep va phan trang.
+- Them CategoryMenu Partial View vao Customer Layout; hien thi danh muc tu database.
+- Bo sung so luong mat hang trong gio tren menu.
+- Them Account/ProfileInfo, UpdateProfile va ChangePassword cho khach hang.
+- Them Admin/Users CRUD tai khoan quan tri; khong cho xoa tai khoan dang dang nhap hoac tai khoan Admin cuoi cung.
+- Them upload anh san pham JPG/JPEG/PNG/WEBP toi da 5 MB; sua Edit de giu anh cu neu khong chon anh moi.
+- Them Data Annotation qua partial metadata de khong bi mat khi cap nhat EDMX.
+- Trang chi tiet danh muc hien thi danh sach san pham lien quan.
+- Sua duong dan layout sai o Admin/Home/Index va them link quan ly tai khoan Admin.
+- Khong xoa tep source cu; khong thay doi bang/cot va khong tu dong chay SQL.
+
+6. GIOI HAN CAN LUU Y
+- Database2024.txt hien tai khong co QuantityInStock, QuantitySold, DeliveryMethod, PaymentMethod va OrderDetail.TotalPrice.
+- Project co script DATABASE_ADD_INVENTORY.sql rieng de bo sung 2 cot ton kho; chua chay script va chua sua EDMX tu dong.
+- Cac chuc nang ton kho, so luong da ban va truong mo rong cua Order chi co the hoan thien sau khi nguoi dung backup DB, xac nhan chay script va Update Model from Database.
+- Chua the Build/Rebuild va chay SQL Server trong moi truong nay; can kiem tra tiep tren Visual Studio/SQL Server Windows.

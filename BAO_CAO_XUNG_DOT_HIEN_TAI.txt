@@ -1,0 +1,35 @@
+﻿BAO CAO SUA XUNG DOT - BE4_LUUTHANHQUAN
+Ngay: 17/11/2026
+
+1. LOI XUNG DOT DA SUA
+- Luong PayPal truoc day luu thong tin giao hang vao TempData nhung controller PayPal lai doc CheckoutModel tu Session; du lieu checkout/cart khong duoc truyen qua redirect.
+- Sau khi PayPal thanh toan thanh cong, code cu chuyen den Orders/CreateOrder nhung project khong co action CreateOrder; do do khong the tao don va dieu huong thanh cong.
+- Callback PayPal phu thuoc model binding CheckoutVM trong khi PayPal tra ve bang query string PayerID/guid.
+- Da sua CartController luu snapshot checkout vao Session; PayPalController tu doc lai gio hang va gia san pham tu database, tao giao dich, xu ly callback, xac nhan thanh toan, tao Order/OrderDetail trong transaction va dieu huong den Cart/OrderSuccess.
+- Bo sung xu ly URL huy thanh toan; gio hang duoc giu lai de khach thu lai.
+- Them kiem tra cau hinh PayPal chua duoc dien thay vi tiep tuc tao giao dich voi gia tri placeholder.
+
+2. CAC PHAN DUOC GIU NGUYEN
+- Khong sua schema/database, EDMX, connection string, cac bang/cot hoac du lieu.
+- Khong thay doi cac chuc nang Admin/Customer khac ngoai diem ket noi PayPal trong CartController.
+- Khong tu dong chay SQL/migration.
+
+3. KIEM TRA TINH TOAN VEN TINH
+- Da parse 22 tep XML/config/project/EDMX: khong co loi cu phap XML.
+- Cac tep Compile/Content/None/EntityDeploy khai bao trong csproj deu ton tai; khong phat hien khai bao trung.
+- Khong phat hien conflict marker Git trong cac tep source/config.
+- Chua the Build/Rebuild MVC5 tren Windows/MSBuild va chua ket noi SQL Server trong moi truong hien tai.
+
+4. CAN XAC NHAN TRUOC KHI CHAY PAYPAL THUC TE
+- Web.config dang de YOUR_PAYPAL_CLIENT_ID va YOUR_PAYPAL_CLIENT_SECRET; can thay bang thong tin Sandbox cua ban.
+- PayPalController hien gui currency USD, trong khi don gia san pham duoc lay truc tiep tu Product.ProductPrice. Phai xac nhan ProductPrice dang luu theo USD. Neu database dang luu VND, can xac dinh ty gia/nguon quy doi duoc phe duyet truoc khi bat thanh toan; khong tu y gan ty gia.
+- Can kiem thu callback tren HTTPS/public callback reachable va tai khoan PayPal Sandbox.
+- Trang thai don hang sau thanh toan PayPal duoc luu la 'Cho xac nhan' de tuong thich voi 5 nhom trang thai hien tai; he thong hien tai dung PaymentStatus cho trang thai xu ly don, chua co cot rieng cho trang thai thanh toan.
+
+5. KIEM THU DE NGHI
+1) Sao luu database MyStore truoc khi kiem thu. Ban sua nay khong can chay SQL.
+2) Dien PayPal Sandbox Client ID/Secret trong Web.config.
+3) Mo solution bang Visual Studio 2019/2022, Restore NuGet va Rebuild.
+4) Dang nhap Customer, them san pham, checkout PayPal, hoan tat Sandbox; kiem tra Orders va OrderDetails chi duoc tao mot lan.
+5) Thu Cancel tren PayPal; xac nhan gio hang van con va co the thu lai.
+6) Thu truy cap /Paypal/PaymentWithPaypal truc tiep khi khong co session; he thong phai quay ve Checkout, khong tao don rong.

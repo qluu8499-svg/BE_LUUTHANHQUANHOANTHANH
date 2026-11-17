@@ -1,0 +1,41 @@
+HUONG DAN BAN DA RA SOAT - BE4 QUAN LY DON HANG
+
+1. Cac diem da sua trong source
+- Customer OrdersController: tim kiem lich su don hang theo ma don HOAC ten san pham.
+- Admin OrdersController: tim kiem don theo ma don, ten/SDT/email khach hang HOAC ten san pham.
+- CartController.OrderSuccess: nap OrderDetails va Product bang Include de trang xac nhan co du du lieu.
+- Views/Cart/OrderSuccess.cshtml: hien thi cac dong san pham, so luong, thanh tien va lien ket lich su mua hang.
+- Giu dung ten cot AddressDelivery theo EDMX hien tai de tranh loi runtime khi DB chua migration.
+
+2. Cac chuc nang va duong dan
+- Khach hang xem lich su: /Orders
+- Khach hang xem chi tiet: /Orders/Details/{id}
+- Admin xem tat ca don: /Admin/Orders
+- Admin xem chi tiet: /Admin/Orders/Details/{id}
+- Admin cap nhat trang thai: form trong trang chi tiet admin.
+- Khach hang checkout: /Cart/Checkout
+
+3. Doi chieu voi PowerPoint
+- Da bao dam luong tao Order + OrderDetail, xac nhan don va xem lich su/chi tiet.
+- Admin co danh sach tat ca don hang, thong tin khach hang, chi tiet san pham va cap nhat trang thai.
+- PowerPoint mo ta them DeliveryMethod, PaymentMethod, ShippingAddress va OrderDetail.TotalPrice computed.
+  EDMX/DB trong ZIP hien tai van dang dung AddressDelivery va chua co cac cot tren.
+  Khong tu dong doi ten cot hay them cot vao DB vi viec do can migration tren dung database MyStore
+  va thao tac Update Model from Database trong Visual Studio. Cac view/controller hien tai tiep tuc
+  dung schema hien co de tranh loi Invalid column name khi chay tren DB cu.
+
+4. Cach kiem thu tren may Windows / Visual Studio
+- Backup database MyStore.
+- Mo BE4_LUUTHANHQUAN.sln, Restore NuGet Packages, Build > Rebuild Solution.
+- Kiem tra connection string MyStoreEntities trong Web.config.
+- Dam bao tai khoan admin co Users.UserRole = 'A' (hoac 'Admin').
+- Dang nhap customer, them san pham vao gio, checkout; kiem tra bang Order va OrderDetail.
+- Vao /Orders, tim theo ma don va ten san pham; mo chi tiet don.
+- Dang nhap admin, vao /Admin/Orders; tim theo ma don/ten khach/ten san pham; mo chi tiet va doi trang thai.
+- Dang nhap customer khac va thu mo URL chi tiet don cua customer dau tien: phai bi tu choi (404).
+
+5. Gioi han xac minh
+- Da kiem tra cu phap XML cua Web.config, cac web.config, csproj, packages.config va EDMX.
+- Da kiem tra tat ca Compile Include trong csproj deu co tep tuong ung.
+- Moi truong thao tac khong co MSBuild/Visual Studio va SQL Server, nen chua the Build C#,
+  chay website hoac kiem thu truy van voi database thuc te. Can chay cac buoc o muc 4 truoc khi nop.
